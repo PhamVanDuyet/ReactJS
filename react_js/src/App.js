@@ -4,18 +4,18 @@ import './App.css';
 import Home from './components/Home';
 import About from './components/About';
 import Shop from './components/Shop';
-import { Menu, 
-  Button 
+import { 
+  Menu, 
+  Button,
+  Layout 
 } from 'antd';
 
 import {
-  AppstoreOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
 } from '@ant-design/icons';
 
 import {
@@ -25,7 +25,7 @@ import {
   Link
 } from "react-router-dom";
 
-const { SubMenu } = Menu;
+const { Header, Sider, Content } = Layout;
 const routes = [
   {
     path: "/",
@@ -46,43 +46,44 @@ class App extends React.Component {
     collapsed: false,
   };
 
-  toggleCollapsed = () => {
+  toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   };
   render() {
   return (
-    <Router>
-      <div style={{ display: "flex" }}>
-        <div style={{ width: 256 }}>
-          <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-          </Button>
-          <Menu
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            mode="inline"
-            theme="dark"
-            inlineCollapsed={this.state.collapsed}
+    <Layout>
+        <Router>
+          <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+            <div className="logo" />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+              <Menu.Item key="1" icon={<UserOutlined />}>
+                <Link to="/">Home</Link>
+              </Menu.Item>
+              <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+                <Link to="/about">About</Link>
+              </Menu.Item>
+              <Menu.Item key="3" icon={<UploadOutlined />}>
+                <Link to="/shop">Shop</Link>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+        <Layout className="site-layout">
+          <Header className="site-layout-background" style={{ padding: 0 }}>
+            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+              className: 'trigger',
+              onClick: this.toggle,
+            })}
+          </Header>
+          <Content
+            className="site-layout-background"
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+            }}
           >
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-            <Link to="/about">About</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<ContainerOutlined />}>
-            <Link to="/shop">Shop</Link>
-            </Menu.Item>
-            <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-              <Menu.Item key="5"><Link to="/about">About</Link></Menu.Item>
-              <Menu.Item key="6"><Link to="/">Home</Link></Menu.Item>
-              <Menu.Item key="7"><Link to="/shop">Shop</Link></Menu.Item>
-            </SubMenu>
-          </Menu>
-        </div>
-        <Switch>
+            <Switch>
           {routes.map((route, index) => (
             <Route
               key={index}
@@ -92,8 +93,11 @@ class App extends React.Component {
             />
           ))}
         </Switch>
-      </div>
-    </Router>
+          </Content>
+        </Layout>
+        </Router>
+
+      </Layout>
   );
   }
 }
