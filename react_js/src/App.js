@@ -2,7 +2,7 @@ import 'antd/dist/antd.css';
 import React from 'react';
 import './App.css';
 import Home from './components/Home';
-import About from './components/About';
+import DanhSachBaiThi from './components/DanhSachBaiThi';
 import Shop from './components/Shop';
 import { 
   Menu, 
@@ -33,8 +33,8 @@ const routes = [
     main: () => <Home />
   },
   {
-    path: "/about",
-    main: () => <About />
+    path: "/danh-sach-bai-thi",
+    main: () => <DanhSachBaiThi />
   },
   {
     path: "/shop",
@@ -62,7 +62,7 @@ class App extends React.Component {
                 <Link to="/">Home</Link>
               </Menu.Item>
               <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                <Link to="/about">About</Link>
+                <Link to="/danh-sach-bai-thi">Danh sách bài thi</Link>
               </Menu.Item>
               <Menu.Item key="3" icon={<UploadOutlined />}>
                 <Link to="/shop">Shop</Link>
