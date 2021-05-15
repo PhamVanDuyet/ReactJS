@@ -2,7 +2,7 @@ import 'antd/dist/antd.css';
 import React from 'react';
 import './App.css';
 import Home from './components/Home';
-import DanhSachBaiThi from './components/DanhSachBaiThi';
+import DanhSachBaiThi from './components/Student/DanhSachBaiThi';
 import Shop from './components/Shop';
 import { 
   Menu, 
